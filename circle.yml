@@ -1,0 +1,16 @@
+machine:
+  services:
+    - docker
+dependencies:
+  override:
+    - ./gradlew dependencies
+test:
+  override:
+    - ./gradlew test
+deployment:
+  rancher:
+    branch: master
+    commands:
+      - wget https://releases.rancher.com/compose/v0.12.2/rancher-compose-linux-amd64-v0.12.2.tar.gz
+      - tar xfz rancher-compose-linux-amd64-v0.12.2.tar.gz
+      - ./rancher-compose-v0.12.2/rancher-compose up -p -u -d --confirm-upgrade

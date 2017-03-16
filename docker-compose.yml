@@ -1,0 +1,27 @@
+version: '2'
+services:
+  person:
+    build: .
+    environment:
+      server.contextPath: /person
+      spring.datasource.driverClassName: com.mysql.jdbc.Driver
+      spring.datasource.initialize: 'true'
+      spring.datasource.password: password
+      spring.datasource.url: jdbc:mysql://mysql:3306/person
+      spring.datasource.username: root
+      spring.h2.console.enabled: 'false'
+      spring.jpa.database: mysql
+      spring.jpa.hibernate.ddl-auto: update
+    links:
+    - mysql:mysql
+    stdin_open: true
+    tty: true
+    ports:
+    - 8080:8080/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  mysql:
+    image: mysql:5
+    environment:
+      MYSQL_DATABASE: person
+      MYSQL_ROOT_PASSWORD: password
