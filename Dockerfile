@@ -1,9 +1,9 @@
 FROM netflixoss/java:8
 
-COPY . /
+COPY . /spring-circle-rancher
 
-RUN ./gradlew build
+RUN cd /spring-circle-rancher && ./gradlew build
 
 EXPOSE 8080
 
-ENTRYPOINT java -jar /build/libs/spring-circle-rancher-0.0.1-SNAPSHOT.jar
+ENTRYPOINT java -jar /spring-circle-rancher/build/libs/spring-circle-rancher-0.0.1-SNAPSHOT.jar
